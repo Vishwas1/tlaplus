@@ -44,31 +44,6 @@ An execution of a sytem is represented as a **sequence** of **discrete** **steps
 - Sequece: We can simulate a concurrent system with a sequential program.
 - Steps: State changes. An execution is represented as state change. (with time)
 
-### State Machines
-
-An execution is represented as **sequence of states** (called _behaviour_).
-
-We want to spcify all the possible behaviour of a digital system. How? 
-
-Way of describing digital system:
-- via Programming language.
-- Turing machines
-- Many different kind of automata
-- Hardware decription languages.
-
-But we can absctract them all with somthing called **state machines**.
-
-A state machine can be described by two things:
-
-1. All possible initial states. 
-2. What is the next states can follow any given state.
-
-It halts when there is not possible next state. 
-
-
-#### Example of stata machine
-
-
 ## Motivation
 
 ### Amazon
@@ -96,6 +71,90 @@ A property TLA+ cant check - 99% of executions produced the right answer.
 ## Lets' start
 
 High level models are called specificaiton and they come at design level, above the code level. TLA+ can specify algorithm and high level designs. You can not generate code from TLA+ spec.
+
+
+## State Machines
+
+An execution is represented as **sequence of states** (called _behaviour_).
+
+We want to spcify all the possible behaviour of a digital system. How? 
+
+Way of describing digital system:
+- via Programming language.
+- Turing machines
+- Many different kind of automata
+- Hardware decription languages.
+
+But we can absctract them all with somthing called **state machines**.
+
+A state machine can be described by two things:
+
+1. All possible initial states. 
+2. What is the next states can follow any given state.
+
+It halts when there is not possible next state. 
+
+How do we desrribe a state machine.?
+
+We must descibe with 3 things:
+1. Variable(s).
+2. The initial value of variable.
+3. The relation between their value in the current state and their possible values in the next state.
+
+Ex.
+
+```c
+int i;
+void main(){
+    i = someNumber();
+    i = i + 1; 
+}
+```
+
+Let us assume that `someNumber()` returns a value in the set `{1-1000}`. `i` is initalized with value `0` in c.
+
+Execution 1: say `someNumber()` returns 42
+
+> [i: 0] -> [i: 42] -> [i: 43] 
+
+here when current value of i = 43, there is `no next value` as the program terminates. ------- (1)
+
+Execution 2:  say `someNumber()` returns 43
+
+> [i: 0] -> [i: 43] -> [i: 44]
+
+here when current value of i = 43, there is the next value is 44. ----------------------------- (2)
+
+Here,
+
+1. The Variable: i
+2. Initial value: 0
+3. Relation: ? 
+
+From (1) and (2), you can say that IMPOSSIBLE to represent the program in this way.
+
+- The problem is the value of `i` is only part of the program's state. 
+- The other part of the state : which specify what statement is to be executed next. - that is called, **control state**. Hence we need to introduce another variable called `pc` for program control which can have three values: `start`, `middle` and `done`
+
+1. The varaibles: i, pc
+2. Inital value: i = 0, pc = start
+3. relation
+
+```
+if current value of pc == start
+    then next value of i in {0,1, .... 1000} & next vlaue of pc = middle
+else if pc == middle
+    then next value = i + 1 &  next value of pc = done
+else no next value -  the program finished.
+```
+
+In TLA+ this can be written in more elegant way with mathematical formula. 
+
+- In programs  different parts of the state are represented differently. The are represented differently becasuse they are implemented differently.
+- State machiens eliminates those low level implementation detials. The provide single abastraction.
+
+
+> TLA+ is an elegant and extremely expressive langugage for descibing state machine. 
 
 ## Links and References
 
