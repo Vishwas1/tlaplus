@@ -20,6 +20,8 @@ A tool to disign system and algorightms, then programmatically verufy that those
 - Designed [Paxos algorithm](https://en.wikipedia.org/wiki/Paxos_(computer_science)) for consensus.
 - Designed [Lamport signature](https://en.wikipedia.org/wiki/Lamport_signature), one of the prototypes of the digital signature.
 
+--- | --- | --- | --- | --- | --- |
+![s](assets/lm.png) | ![s](assets/lm2.png) | ![s](assets/lm3.png) | ![s](assets/lm4.png) | ![s](assets/lm5.png) | ![s](assets/lm6.png) |
 
 
 ## Abstraction
